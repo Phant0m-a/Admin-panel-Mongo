@@ -1,0 +1,96 @@
+<%-include('../partials/global/navbar')%>
+    <div id="layoutSidenav">
+        <%-include('../partials/global/sidebar')%>
+
+            <div id="layoutSidenav_content">
+                <main>
+
+<!--  -->
+
+
+    <div class="container pt-3 col-md-6 col-lg-12 ">
+
+        <div>
+            <h3>Edit</h3>
+        </div>
+       
+        <form action="/api/course/?_method=PUT" method="post" enctype="multipart/form-data">
+
+            <input type="hidden" value="<%=course._id%>" name="id">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Title</label>
+                <input type="text" class="form-control" value="<%=course.title%>" name='title' required
+                    id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail2" class="form-label">Price</label>
+                <input type="number" class="form-control" value="<%=course.price%>" name='price' required
+                    id="exampleInputEmail2" aria-describedby="emailHelp">
+
+            </div>
+            
+           
+            
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Description</label>
+                <textarea required name="description" class="form-control  mb-2 mr-sm-2   me-md-2"
+                    id="exampleFormControlTextarea1" rows="3"><%=course.description%></textarea>
+
+
+            </div>
+            <div class="mb-3">
+                <label for="thumbnail" class="form-label">Image</label>
+                <input type="file" class="form-control" name="thumbnail" accept="image/*"
+                id="image aria-describedby="emailHelp">
+
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Enable/Disable Course</label>
+                <select class="form-control mb-2 mr-sm-2   me-md-2" name="enabled" id="enabled" required>
+
+                    <%  if(course.enabled==true){ %>
+                    <option value="true" selected>Enable</option>
+                    <option value="false">Disable</option>
+
+
+                    <%  }else{ %>
+                    <option value="false" selected>Disable</option>
+                    <option value="true">Enable</option>
+                    <%    } %>
+
+
+
+                </select>
+
+
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Category</label>
+                <select class="form-control mb-2 mr-sm-2   me-md-2" name="category" id="category" required>
+                    <% cats.map((cat,index)=>{%>
+                    <%  if(cat.title==course.category.title){ %>
+                    <option value="<%=cat._id%>" selected><%=cat.title%></option>
+                    <%  }else{ %>
+                    <option value="<%=cat._id%>"><%=cat.title%></option>
+                    <%    } %>
+
+                    <% })%>
+
+                </select>
+
+
+            </div>
+            <button class="btn btn-primary">Update</button>
+           
+        </form>
+        <%- include('partials/manage_show_lecture',{lecture:lecture})%>
+    </div>
+   
+<!--  -->
+                </main>
+
+
+            </div>
+            
+    </div>
+

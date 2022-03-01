@@ -1,0 +1,143 @@
+<div class="container">
+<br><br>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr class="text-center">
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Cover</th>
+
+
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                <% lecture.map((item,index)=>{%>
+                    
+                    <tr>
+                        <td>
+                            <%=index+1%>
+                        </td>
+                        <td>
+                            <%=item.title%>
+                        </td>
+                        <td>
+                            <%=item.description%>
+                        </td>
+                        <td>
+                            <img height="50px" src="http://localhost:5000/<%=item.imgUrl%>" alt="Image not found">
+                        </td>
+                        <td>
+                           <div>
+                               <div class="d-flex flex-row">
+                                <button data-bs-toggle="modal" data-bs-target="#whycourse<%=index%>"
+                                    class="btn btn-danger btn-sm m-1">Delete </button>
+                                <button data-bs-toggle="modal" data-bs-target="#whycourseEdit<%=index%>"
+                                    class="btn btn-secondary btn-sm m-1">Edit</button>
+                               </div>
+                           </div>
+                        </td>
+                    </tr>
+
+                    <!-- edit  -->
+                    <div class="modal fade" id="whycourseEdit<%=index%>" tabindex="-1" aria-labelledby="add-cat"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Update Lecture Details</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="whyform<%=item._id%>" action="/api/lecture/?_method=PUT"
+                                        method="post" enctype="multipart/form-data">
+                                        <input type="hidden" value="<%=index%>" name="index">
+                                        <input type="hidden" value="<%=item._id%>" name="id">
+
+                                        <div class="mb-3">
+                                            <label for="title" class="form-label">Title</label>
+                                            <input type="text" value="<%=item.title%>" class="form-control" name='title'
+                                                required id="title" aria-describedby="emailHelp">
+
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="course class=" form-label">Course</label>
+                                            <input type="text" value="<%=item.course%>" class="form-control"
+                                                name='course' required id="course aria-describedby=" emailHelp">
+
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="description" class="form-label">Description</label>
+                                            <textarea required name="description"
+                                                class="form-control  mb-2 mr-sm-2   me-md-2"
+                                                id="exampleFormControlTextarea1"
+                                                rows="3"><%=item.description%></textarea>
+
+
+
+
+
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="imgUrl" class="form-label">Image</label>
+                                            <input type="file" class="form-control" name='imgUrl' accept="image/*"
+                                                id="imgUrl" aria-describedby="emailHelp">
+
+                                        </div>
+
+
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" form="whyform<%=item._id%>"
+                                        class="btn btn-primary">Edit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- delete -->
+
+                    <div class="modal fade" id="whycourse<%=index%>" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Are you sure to delete <%=index+1%>
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <form action="/api/lecture/?_method=DELETE"
+                                        method="POST">
+                                        <input type="hidden" value="<%=course._id%>" name="course" />
+                                        <input type="hidden" value="<%=index%>" name="index" />
+                                        <button type="submit" class="btn btn-danger">Delete
+                                        </button>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+
+
+
+            </tbody>
+        </table>
+    </div>
+
+
+</div>

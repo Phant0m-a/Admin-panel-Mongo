@@ -1,0 +1,48 @@
+<%-include('../partials/global/navbar')%>
+<div id="layoutSidenav">
+    <%-include('../partials/global/sidebar')%>
+
+    <div id="layoutSidenav_content">
+        <main>
+
+            <div class="container mt-3">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr class="text-center">
+                            <th>Id</th>
+                            <th>User Email</th>
+                            <th>User Name</th>
+
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr class="text-center">
+                            <th>Id</th>
+                            <th>User Email</th>
+                            <th>User Name</th>
+                            
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <% users.map((user,index)=>{ %>
+                        <tr class="text-center">
+                            <td><%=user.id%></td>
+                            <td><%=user.email%></td>
+                            <td><%=user.name%></td>
+                            
+
+                        </tr>
+
+
+                        <%  })%>
+
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+
+    </div>
+
+</div>

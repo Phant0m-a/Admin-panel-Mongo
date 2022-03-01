@@ -1,0 +1,80 @@
+<div class="mt-3 container px-5">
+    <% list.forEach((item,i)=> { %>
+        <div class="d-flex">
+            <h4 class="text-muted">
+                <%=i+1%>
+            </h4>
+            <h4 class="ps-3">
+                <%=item.title%>
+            </h4>
+            <div>
+                <a class="btn ps-2" data-bs-toggle="modal" data-bs-target="#cat<%=item._id%>"><i class="fa fa-trash"
+                        aria-hidden="true"></i></a>
+
+            </div>
+            <div>
+                <a class="btn ps-2" data-bs-toggle="modal" data-bs-target="#catEdit<%=item._id%>"><i class="fa fa-edit"
+                        aria-hidden="true"></i></a>
+
+            </div>
+
+
+        </div>
+
+        <div class="modal fade" id="cat<%=item._id%>" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure to delete <%=item.title%>
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <form action="/api/category/?_method=DELETE" method="POST">
+                            <input type="hidden" value="<%=item._id%>" name="id" />
+                            <button type="submit" class="btn btn-danger">Delete
+                            </button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="catEdit<%=item._id%>" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="catEdit<%=i%>" action="/api/category/?_method=PUT" method="POST">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Title</label>
+                                <input type="hidden" name="id" value="<%=item._id%>">
+                                <input type="text" class="form-control" value="<%=item.title%>" name='title' required
+                                    id="title" aria-describedby="emailHelp">
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                        <button form="catEdit<%=i%>" type="submit" class="btn btn-primary">Edit
+                        </button>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% });%>
+</div>

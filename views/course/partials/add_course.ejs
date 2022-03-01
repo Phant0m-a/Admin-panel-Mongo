@@ -1,0 +1,74 @@
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="add-course" tabindex="-1" aria-labelledby="add-cat" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Course</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="add-cat-form" action="/api/course/" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control" name='title' required id="title"
+                            aria-describedby="title">
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <input type="text" class="form-control" name='description' required id="description"
+                            aria-describedby="description">
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="number" class="form-control" name='price' required id="price"
+                            aria-describedby="price">
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="thumbnail" class="form-label">Thumbnail</label>
+                        <input type="file" class="form-control" name='thumbnail' required id="thumbnail"
+                            aria-describedby="thumbnail">
+
+                    </div>
+
+                    <div class="form-group  mb-3">
+                        <label for="category" class="form-label">Choose Category</label>
+                        <select class="form-control" name="category" id="category" required>
+                            <% cats.map((cat,index)=>{%>
+                                <% if(index==0){ %>
+                                    <option value="<%=cat._id%>" selected>
+                                        <%=cat.title%>
+                                    </option>
+                                    <% }else{ %>
+                                        <option value="<%=cat._id%>">
+                                            <%=cat.title%>
+                                        </option>
+                                        <% } %>
+
+                                            <% })%>
+
+                        </select>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Course Status</label>
+                        <select class="form-control mb-2 mr-sm-2   me-md-2" name="enable" id="enable" required>
+                            <option value="Disable" selected>Disable</option>
+                            <option value="Enable">Enable</option>
+                        </select>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" form="add-cat-form" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+    </div>
+</div>

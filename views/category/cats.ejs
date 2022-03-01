@@ -1,0 +1,20 @@
+<%- include('../partials/global/navbar.ejs')%>
+<div id="layoutSidenav">
+    <%- include('../partials/global/sidebar.ejs')%>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container pt-2">
+                <a class="btn btn-warning" href="/api/home/list">Back</a>
+                <div class="d-flex justify-content-between mt-2 mb-2">
+                    <h2>Categories</h2>
+                    <div> <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add-cat">Add</a></div>
+                </div>
+
+                <%- include('./partials/add_cat') %>
+            </div>
+            <%- include('./partials/manage_cats') %>
+
+
+        </main>
+    </div>
+</div>
