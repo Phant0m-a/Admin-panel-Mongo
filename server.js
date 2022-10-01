@@ -67,7 +67,9 @@ db.once('open', () => console.log('connected to mongodb'));
 //   client.close();
 // });
 //...
-
+app.get('/', (req,res)=>{
+    res.redirect('/api/auth/');
+});
 // app.use
 app.use("/api/auth", authRouter);
 app.use("/api/home", homeRouter);
