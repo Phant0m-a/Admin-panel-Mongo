@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const { MongoClient, ServerApiVersion } = require('mongodb');
 const cookieParser = require('cookie-parser');
 const expressLayouts = require('express-ejs-layouts')
 const app = express();
@@ -30,19 +31,42 @@ app.use(methodOverride('_method'))
 app.use(fileUpload());
 
 // mongo connection
-mongoose.connect(
-    'mongodb://localhost:27017/educationalapp',
-    {
-        useNewUrlParser: true,
+// mongoose.connect(
+//     'mongodb://localhost:27017/educationalapp',
+//     {
+//         useNewUrlParser: true,
 
-        useUnifiedTopology: true
-    }
-);
+//         useUnifiedTopology: true
+//     }
+// );
 
+// const db = mongoose.connection;
+// db.on('error', error => console.log(error))
+// db.once('open', () => console.log('connected to mongodb'));
+// ...
+
+//production configs!
+// i'm putting it here intentionally!
+mongoose.connect("mongodb+srv://admin-Ahsan:UYjdUQrEsTo5pPFy@cluster0.xa5t5.mongodb.net/educationalapp?retryWrites=true&w=majority", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverApi: ServerApiVersion.v1
+    // useCreateIndex: true
+});
 const db = mongoose.connection;
 db.on('error', error => console.log(error))
 db.once('open', () => console.log('connected to mongodb'));
-// ...
+
+
+
+// const uri = "";
+// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+// client.connect(err => {
+//   const collection = client.db("test").collection("devices");
+//   // perform actions on the collection object
+//   client.close();
+// });
+//...
 
 // app.use
 app.use("/api/auth", authRouter);
