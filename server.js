@@ -68,7 +68,7 @@ db.once('open', () => console.log('connected to mongodb'));
 // });
 //...
 app.get('/', (req,res)=>{
-    res.redirect('/api/auth/');
+    res.send('Welcome to Educatonal admin panel, please visit https://couse-admin-panel/api/auth/login');
 });
 // app.use
 app.use("/api/auth", authRouter);
@@ -80,4 +80,4 @@ app.use("/api/lecture", lectureRouter);
 // ...
 
 // app listener
-app.listen(process.Port || 5000, () => console.log('EducationalApp server started at Port 5000'));
+app.listen(process.Port , () => console.log('EducationalApp server started at Port' + `process.Port`));
