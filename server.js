@@ -80,4 +80,7 @@ app.use("/api/lecture", lectureRouter);
 // ...
 
 // app listener
-app.listen(process.Port , () => console.log('EducationalApp server started at Port' + `process.Port`));
+// app.listen(process.Port , () => console.log('EducationalApp server started at Port' + `process.Port`));
+app.listen(process.env.PORT || 3001, '0.0.0.0', () => {
+  console.log("Server is running.");
+});
